@@ -1,0 +1,67 @@
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+
+args = getResolvedOptions(sys.argv, ["JOB_NAME"])
+sc = SparkContext()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args["JOB_NAME"], args)
+
+# Script generated for node AWS Glue Data Catalog
+AWSGlueDataCatalog_node1699635000770 = glueContext.create_dynamic_frame.from_catalog(
+    database="youtube-db-cleaned",
+    table_name="cleaned_statistics_reference_data",
+    transformation_ctx="AWSGlueDataCatalog_node1699635000770",
+)
+
+# Script generated for node AWS Glue Data Catalog
+AWSGlueDataCatalog_node1699634984822 = glueContext.create_dynamic_frame.from_catalog(
+    database="youtube-db-cleaned",
+    table_name="raw_statistics",
+    transformation_ctx="AWSGlueDataCatalog_node1699634984822",
+)
+
+# Script generated for node Change Schema
+ChangeSchema_node1699635280777 = ApplyMapping.apply(
+    frame=AWSGlueDataCatalog_node1699635000770,
+    mappings=[
+        ("kind", "string", "kind", "string"),
+        ("etag", "string", "etag", "string"),
+        ("id", "string", "id", "long"),
+        ("snippet_channelid", "string", "snippet_channelid", "string"),
+        ("snippet_title", "string", "snippet_title", "string"),
+        ("snippet_assignable", "boolean", "snippet_assignable", "boolean"),
+    ],
+    transformation_ctx="ChangeSchema_node1699635280777",
+)
+
+# Script generated for node Join
+Join_node1699635027413 = Join.apply(
+    frame1=ChangeSchema_node1699635280777,
+    frame2=AWSGlueDataCatalog_node1699634984822,
+    keys1=["id"],
+    keys2=["category_id"],
+    transformation_ctx="Join_node1699635027413",
+)
+
+# Script generated for node Amazon S3
+AmazonS3_node1699635831933 = glueContext.getSink(
+    path="s3://mehdi-touil-us-east-1-analytics-dev",
+    connection_type="s3",
+    updateBehavior="UPDATE_IN_DATABASE",
+    partitionKeys=["category_id"],
+    compression="snappy",
+    enableUpdateCatalog=True,
+    transformation_ctx="AmazonS3_node1699635831933",
+)
+AmazonS3_node1699635831933.setCatalogInfo(
+    catalogDatabase="youtube-db-analytics", catalogTableName="final_analytics"
+)
+AmazonS3_node1699635831933.setFormat("glueparquet")
+AmazonS3_node1699635831933.writeFrame(Join_node1699635027413)
+job.commit()
