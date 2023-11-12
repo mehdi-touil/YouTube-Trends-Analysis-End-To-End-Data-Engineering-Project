@@ -58,7 +58,7 @@ This project aims to analyze trending videos across different regions using the 
    - Build a dashboard in powerBi using ODBC as DataSource.
 ![Dashboard](Images/dashboard.png)
 
-# AWS Services UsedSed
+# AWS Services Used
 
 ## Amazon S3
 Amazon S3 is an object storage service providing manufacturing scalability, data availability, security, and performance.
