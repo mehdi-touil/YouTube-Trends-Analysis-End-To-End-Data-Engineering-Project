@@ -10,7 +10,7 @@ This project aims to analyze trending videos across different regions using the 
 - **Dataset:**
     - The dataset includes several months of data on daily trending YouTube videos from regions including the US, GB, DE, CA, FR, RU, MX, KR, JP, and IN. The dataset is sourced from [Kaggle](https://www.kaggle.com/datasets/datasnaek/youtube-new/).
 - **Architecture:**
-![architecture loading](architecture.jpeg)
+![architecture loading](Architecture.jpeg)
 
 ## Key Project Steps
 
