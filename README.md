@@ -18,7 +18,7 @@ This project aims to analyze trending videos across different regions using the 
    - Overview of the project and its importance.
 
 2. **Learning Objectives:**
-   - Detailed explanation of what participants will learn throughout the project.
+   - Explain Factors that make a video popular.
 
 3. **Understanding the Dataset:**
    - Exploration of the dataset used in the project.
@@ -58,3 +58,18 @@ This project aims to analyze trending videos across different regions using the 
    - Build a dashboard in powerBi using ODBC as DataSource.
 ![Dashboard](Images/dashboard.png)
 
+# AWS Services UsedSed
+
+## Amazon S3
+Amazon S3 is an object storage service providing manufacturing scalability, data availability, security, and performance.
+## AWS IAM
+AWS Identity and Access Management (IAM) is a service enabling us to manage access to AWS services and resources securely.
+
+## AWS Glue
+AWS Glue is a serverless data integration service that simplifies the discovery, preparation, and combination of data for analytics, machine learning, and application development.
+
+## AWS Lambda
+AWS Lambda is a computing service that allows programmers to run code without creating or managing servers.
+
+## AWS Athena
+AWS Athena is an interactive query service for S3 that eliminates the need to load data; it stays in S3.
